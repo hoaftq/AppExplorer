@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="appDetails.imagePath" width="100%">
+        </div>
+        <div class="col-md-8">
+            <h3 class="text-primary">{{appDetails.name}}</h3>
+            <div class="mb-3">{{appDetails.shortDescription}}</div>
+            <h6>Description</h6>
+            <div class="ml-2 mb-3">{{appDetails.description}}</div>
+            <h6>Category</h6>
+            <div class="ml-2 mb-3">{{appDetails.categoryName}}</div>
+            <h6>Language</h6>
+            <div class="ml-2 mb-3">{{appDetails.language}}</div>
+            <h6>URL</h6>
+            <div class="ml-2 mb-3">
+                <a [href]="appDetails.url">{{appDetails.url}}</a>
+            </div>
+            <h6>Source URL</h6>
+            <div class="ml-2 mb-3">
+                <a [href]="appDetails.sourceUrl">{{appDetails.sourceUrl}}</a>
+            </div>
+        </div>
+    </div>
+</div>

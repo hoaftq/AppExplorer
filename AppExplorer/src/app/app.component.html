@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: lightskyblue;">
+  <a class="navbar-brand" href="#">App Explorer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/apps">Apps</a>
+      </li>
+      <li *ngIf="isAuthorized" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">Admin</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/admin/update-app">Add a new app</a>
+          <a class="dropdown-item">Change password</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
