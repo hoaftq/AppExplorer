@@ -1,0 +1,14 @@
+<div class="row row-cols-1 row-cols-md-3 px-1">
+    <div class="col" *ngFor="let app of apps">
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{app.name}}</h5>
+                <p class="card-text ml-2">{{app.shortDescription}}</p>
+            </div>
+            <img *ngIf="app.imagePath" [src]="app.imagePath" class="card-img-top" [alt]="app.name" width="100%">
+            <div class="card-body">
+                <a class="card-link btn btn-primary" routerLink="/apps/{{app.id}}">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
