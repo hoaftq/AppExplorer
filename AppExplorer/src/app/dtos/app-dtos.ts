@@ -11,7 +11,7 @@ export interface AppDetailsDto {
     shortDescription: string;
     description: string;
     imagePath?: string;
-    language: string;
+    languages: LanguageDto[];
     level: number;
     url?: string;
     sourceUrl: string;
@@ -23,6 +23,11 @@ export interface AppDetailsDto {
 }
 
 export interface CategoryDto {
+    id: number;
+    name: string;
+}
+
+export interface LanguageDto {
     id: number;
     name: string;
 }
