@@ -4,43 +4,47 @@
 <ng-template #updateBlock>
     <h4>Update an app</h4>
 </ng-template>
-<form>
+<form [formGroup]="appForm">
     <div *ngIf="!isNew" class="form-group">
         <label for="id">ID</label>
-        <input type="number" class="form-control-plaintext" id="id" readonly>
+        <input formControlName="id" type="number" class="form-control-plaintext" id="id" readonly>
     </div>
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name">
+        <input formControlName="name" type="text" class="form-control" id="name">
     </div>
     <div class="form-group">
         <label for="shortDescription">Short description</label>
-        <input type="text" class="form-control" id="shortDescription">
+        <input formControlName="shortDescription" type="text" class="form-control" id="shortDescription">
     </div>
     <div class="form-group">
-        <label for="description">Short description</label>
-        <textarea class="form-control" id="description"></textarea>
+        <label for="description">Description</label>
+        <textarea formControlName="description" class="form-control" id="description"></textarea>
     </div>
     <div class="form-group">
         <label for="category">Category</label>
-        <select class="form-control" id="category">
-            <option>Game</option>
+        <select formControlName="category" class="form-control" id="category">
+            <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
         </select>
     </div>
     <div class="form-group">
-        <label for="language"></label>
-        <select class="form-control" id="language">
-            <option>C#</option>
-            <option>Java</option>
-        </select>
+        <div>Language or framework</div>
+        <div *ngFor="let l of languages" class="form-check form-check-inline">
+            <input type="checkbox" [value]="l.id" class="form-check-input" [id]="'language' + l.id">
+            <label [for]="'language' + l.id" class="form-check-label">{{l.name}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="level">Level</label>
+        <input formControlName="level" type="number" min="1" max="10" id="level" class="form-control">
     </div>
     <div class="form-group">
         <label for="url">URL</label>
-        <input type="text" class="form-control" id="url">
+        <input formControlName="url" type="text" class="form-control" id="url">
     </div>
     <div class="form-group">
         <label for="sourceUrl">Source URL</label>
-        <input type="text" class="form-control" id="sourceUrl">
+        <input formControlName="sourceUrl" type="text" class="form-control" id="sourceUrl">
     </div>
-    <button class="form-control btn btn-primary">Save</button>
+    <button class="form-control btn btn-primary" (click)="onSave()">Save</button>
 </form>

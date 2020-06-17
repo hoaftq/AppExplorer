@@ -10,8 +10,10 @@
             <div class="ml-2 mb-3">{{appDetails.description}}</div>
             <h6>Category</h6>
             <div class="ml-2 mb-3">{{appDetails.categoryName}}</div>
-            <h6>Language</h6>
-            <div class="ml-2 mb-3">{{appDetails.language}}</div>
+            <h6>Language or framework</h6>
+            <div class="ml-2 mb-3">
+                <span *ngFor="let l of appDetails.languages" class="mr-2">{{l.name}}</span>
+            </div>
             <h6>URL</h6>
             <div class="ml-2 mb-3">
                 <a [href]="appDetails.url">{{appDetails.url}}</a>

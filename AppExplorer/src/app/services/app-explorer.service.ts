@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppDetailsDto, AppDto, CategoryDto } from '../dtos/app-dtos';
+import { AppDetailsDto, AppDto, CategoryDto, LanguageDto } from '../dtos/app-dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AppExplorerService {
       shortDescription: 'TicTacToe game with 3x3 board',
       description: '',
       imagePath: 'assets/TicTacToe.jpg',
-      language: 'Javascript',
+      languages: [{ id: 1, name: 'Javascript' }],
       level: 1,
       url: 'https://blue-coast-08ba4c600.azurestaticapps.net/',
       sourceUrl: 'https://github.com/hoaftq/TicTacToe',
@@ -29,7 +29,7 @@ export class AppExplorerService {
       shortDescription: '248 Game',
       description: '',
       imagePath: 'assets/248Game.jpg',
-      language: 'Javascript',
+      languages: [{ id: 1, name: 'Javascript' }],
       level: 2,
       url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
       sourceUrl: 'https://github.com/hoaftq/248Game',
@@ -44,7 +44,7 @@ export class AppExplorerService {
       name: 'Test data generator',
       shortDescription: 'A tool to generate test data',
       description: '',
-      language: 'C#',
+      languages: [{ id: 2, name: 'C#' }, { id: 3, name: "WPF" }],
       level: 1,
       url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
       sourceUrl: 'https://github.com/hoaftq/248Game',
@@ -59,7 +59,7 @@ export class AppExplorerService {
       name: 'Sudoku',
       shortDescription: 'A popular puzzle game',
       description: '',
-      language: 'C#',
+      languages: [{ id: 2, name: 'C#' }, { id: 4, name: "UWP" }],
       level: 3,
       url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
       sourceUrl: 'https://github.com/hoaftq/248Game',
@@ -100,5 +100,12 @@ export class AppExplorerService {
       { id: 1, name: 'Game' },
       { id: 2, name: "Tool" }
     ];
+  }
+
+  getLanguages(): LanguageDto[] {
+    return [
+      { id: 1, name: "Java" },
+      { id: 2, name: "C#" },
+      { id: 3, name: "Typescript" }];
   }
 }
