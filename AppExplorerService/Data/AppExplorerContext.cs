@@ -8,6 +8,8 @@ class AppExplorerContext : DbContext
 
     public DbSet<Language> Languages { get; set; }
 
+    public DbSet<AppLanguage> AppLanguages { get; set; }
+
     public AppExplorerContext(DbContextOptions<AppExplorerContext> options) : base(options)
     {
     }
@@ -17,6 +19,16 @@ class AppExplorerContext : DbContext
         modelBuilder.Entity<App>(b =>
         {
             b.ToTable("App");
+            b.Property(e => e.Name).HasMaxLength(100).IsRequired();
+            b.HasIndex(e => e.Name).IsUnique(); // Name is unique
+            b.Property(e => e.ShortDescription).HasMaxLength(1000).IsRequired();
+            b.Property(e => e.Description).IsRequired();
+            b.Property(e => e.ImagePath).HasMaxLength(255);
+            b.Property(e => e.Level); // int is required by default
+            b.Property(e => e.Url).HasMaxLength(255);
+            b.Property(e => e.SourceUrl).HasMaxLength(255).IsRequired();
+            b.Property(e => e.CreatedDate).HasDefaultValueSql("GETDATE()"); // default value implies value genarated on adding
+            b.Property(e => e.UpdatedDate).HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
         });
 
         modelBuilder.Entity<Category>(b =>
@@ -25,8 +37,8 @@ class AppExplorerContext : DbContext
             b.Property(e => e.Name).HasMaxLength(200).IsRequired();
         });
 
-        modelBuilder.Entity<Language>().ToTable("Language")
-                                       .HasData(
+        modelBuilder.Entity<Language>().ToTable("Language").Property(e => e.Name).HasMaxLength(50);
+        modelBuilder.Entity<Language>().HasData(
                                                     new Language() { Id = 1, Name = "C#" },
                                                     new Language() { Id = 2, Name = "Java" },
                                                     new Language() { Id = 3, Name = "Javascript" },
@@ -42,10 +54,13 @@ class AppExplorerContext : DbContext
                                                     new Language() { Id = 13, Name = "Asp.Net Core Razor" },
                                                     new Language() { Id = 14, Name = "Entity Framework Core" }
                                                 );
-    }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AppExplorer;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        modelBuilder.Entity<AppLanguage>().ToTable("AppLanguage").HasKey(e => new { e.AppId, e.LanguageId });
+
+        modelBuilder.Entity<User>(b =>
+        {
+            b.Property<string>("Password").HasMaxLength(100).IsRequired();
+            b.HasData(new { UserId = "admin", Password = "password" });
+        });
     }
 }

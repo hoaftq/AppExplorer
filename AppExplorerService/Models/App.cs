@@ -13,7 +13,7 @@ class App
 
     public string ImagePath { get; set; }
 
-    public int Level { get; set; }
+    public Level Level { get; set; }
 
     public string Url { get; set; }
 
@@ -24,7 +24,7 @@ class App
     public DateTime UpdatedDate { get; set; }
 
 
-    public ICollection<Language> Languages { get; set; }
+    public ICollection<AppLanguage> AppLanguages { get; set; }
 
     public int CategoryId { get; set; }
 
