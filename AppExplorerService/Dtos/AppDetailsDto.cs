@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class App
+class AppDetailsDto
 {
     public int Id { get; set; }
 
@@ -13,6 +13,8 @@ class App
 
     public string ImagePath { get; set; }
 
+    public List<Language> Languages { get; set; }
+
     public Level Level { get; set; }
 
     public AppUrl Urls { get; set; }
@@ -20,11 +22,6 @@ class App
     public DateTime CreatedDate { get; set; }
 
     public DateTime UpdatedDate { get; set; }
-
-
-    public ICollection<AppLanguage> AppLanguages { get; set; }
-
-    public int CategoryId { get; set; }
 
     public Category Category { get; set; }
 }

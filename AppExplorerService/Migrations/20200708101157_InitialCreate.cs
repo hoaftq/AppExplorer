@@ -37,8 +37,8 @@ namespace AppExplorerService.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(maxLength: 100, nullable: false)
+                    UserId = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
+                    Password = table.Column<string>(unicode: false, maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,10 +54,13 @@ namespace AppExplorerService.Migrations
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     ShortDescription = table.Column<string>(maxLength: 1000, nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    ImagePath = table.Column<string>(maxLength: 255, nullable: true),
+                    ImagePath = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
                     Level = table.Column<int>(nullable: false),
-                    Url = table.Column<string>(maxLength: 255, nullable: true),
-                    SourceUrl = table.Column<string>(maxLength: 255, nullable: false),
+                    DeployedUrl = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
+                    SourceUrl = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
+                    LibUrl = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
+                    DownloadUrl = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
+                    ArticleUrl = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     UpdatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     CategoryId = table.Column<int>(nullable: false)

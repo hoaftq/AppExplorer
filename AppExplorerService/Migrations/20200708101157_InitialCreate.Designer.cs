@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppExplorerService.Migrations
 {
     [DbContext(typeof(AppExplorerContext))]
-    [Migration("20200707095932_InitialCreate")]
+    [Migration("20200708101157_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,8 +40,9 @@ namespace AppExplorerService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(255)
+                        .IsUnicode(false);
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -56,19 +57,10 @@ namespace AppExplorerService.Migrations
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
-                    b.Property<string>("SourceUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
@@ -203,12 +195,15 @@ namespace AppExplorerService.Migrations
             modelBuilder.Entity("User", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
 
                     b.HasKey("UserId");
 
@@ -229,6 +224,52 @@ namespace AppExplorerService.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.OwnsOne("AppUrl", "Urls", b1 =>
+                        {
+                            b1.Property<int>("AppId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("ArticleUrl")
+                                .HasColumnName("ArticleUrl")
+                                .HasColumnType("varchar(255)")
+                                .HasMaxLength(255)
+                                .IsUnicode(false);
+
+                            b1.Property<string>("DeployedUrl")
+                                .HasColumnName("DeployedUrl")
+                                .HasColumnType("varchar(255)")
+                                .HasMaxLength(255)
+                                .IsUnicode(false);
+
+                            b1.Property<string>("DownloadUrl")
+                                .HasColumnName("DownloadUrl")
+                                .HasColumnType("varchar(255)")
+                                .HasMaxLength(255)
+                                .IsUnicode(false);
+
+                            b1.Property<string>("LibUrl")
+                                .HasColumnName("LibUrl")
+                                .HasColumnType("varchar(255)")
+                                .HasMaxLength(255)
+                                .IsUnicode(false);
+
+                            b1.Property<string>("SourceUrl")
+                                .IsRequired()
+                                .HasColumnName("SourceUrl")
+                                .HasColumnType("varchar(255)")
+                                .HasMaxLength(255)
+                                .IsUnicode(false);
+
+                            b1.HasKey("AppId");
+
+                            b1.ToTable("App");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AppId");
+                        });
                 });
 
             modelBuilder.Entity("AppLanguage", b =>

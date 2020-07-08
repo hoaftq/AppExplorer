@@ -23,12 +23,19 @@ class AppExplorerContext : DbContext
             b.HasIndex(e => e.Name).IsUnique(); // Name is unique
             b.Property(e => e.ShortDescription).HasMaxLength(1000).IsRequired();
             b.Property(e => e.Description).IsRequired();
-            b.Property(e => e.ImagePath).HasMaxLength(255);
+            b.Property(e => e.ImagePath).HasMaxLength(255).IsUnicode(false);
             b.Property(e => e.Level); // int is required by default
-            b.Property(e => e.Url).HasMaxLength(255);
-            b.Property(e => e.SourceUrl).HasMaxLength(255).IsRequired();
             b.Property(e => e.CreatedDate).HasDefaultValueSql("GETDATE()"); // default value implies value genarated on adding
             b.Property(e => e.UpdatedDate).HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
+
+            b.OwnsOne(e => e.Urls, ob =>
+            {
+                ob.Property(e => e.ArticleUrl).HasColumnName("ArticleUrl").HasMaxLength(255).IsUnicode(false);
+                ob.Property(e => e.DeployedUrl).HasColumnName("DeployedUrl").HasMaxLength(255).IsUnicode(false);
+                ob.Property(e => e.DownloadUrl).HasColumnName("DownloadUrl").HasMaxLength(255).IsUnicode(false);
+                ob.Property(e => e.LibUrl).HasColumnName("LibUrl").HasMaxLength(255).IsUnicode(false);
+                ob.Property(e => e.SourceUrl).HasColumnName("SourceUrl").HasMaxLength(255).IsUnicode(false).IsRequired();
+            });
         });
 
         modelBuilder.Entity<Category>(b =>
@@ -59,7 +66,8 @@ class AppExplorerContext : DbContext
 
         modelBuilder.Entity<User>(b =>
         {
-            b.Property<string>("Password").HasMaxLength(100).IsRequired();
+            b.Property(e => e.UserId).HasMaxLength(100).IsUnicode(false).IsRequired();
+            b.Property<string>("Password").HasMaxLength(100).IsUnicode(false).IsRequired();
             b.HasData(new { UserId = "admin", Password = "password" });
         });
     }
