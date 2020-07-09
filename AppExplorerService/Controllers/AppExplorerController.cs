@@ -28,46 +28,91 @@ class AppExplorerController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<AppDetailsDto> GetAppDetails(int id)
+    public async Task<ActionResult<AppDetailsDto>> GetAppDetails(int id)
     {
         var result = await context.Apps.Include(a => a.Category)
                                         .Include(a => a.AppLanguages)
                                             .ThenInclude(al => al.Language)
                                         .Where(a => a.Id == id)
-                                        .Select(a => new AppDetailsDto()
-                                        {
-                                            Id = a.Id,
-                                            Name = a.Name,
-                                            ShortDescription = a.ShortDescription,
-                                            Description = a.Description,
-                                            ImagePath = a.ImagePath,
-                                            Level = a.Level,
-                                            CreatedDate = a.CreatedDate,
-                                            UpdatedDate = a.UpdatedDate,
-                                            Urls = a.Urls,
-                                            Category = a.Category,
-                                            Languages = a.AppLanguages.Select(al => al.Language).ToList()
-                                        })
+                                        .Select(a => ConvertAppEntityToDto(a))
                                         .SingleOrDefaultAsync();
+        if (result == null)
+        {
+            return NotFound();
+        }
+
         return result;
 
     }
 
     [HttpPut]
-    public void CreateApp(AppDetailsDto dto)
+    public async Task<IActionResult> CreateApp(AppDetailsDto dto)
     {
+        var app = CopyAppDetailsDtoToEntity(dto, new App());
+        context.Apps.Add(app);
+        await context.SaveChangesAsync();
 
+        return CreatedAtAction(nameof(GetAppDetails), app.Id, app);
     }
 
     [HttpPost]
-    public void UpdateApp(AppDetailsDto dto)
+    public async Task<IActionResult> UpdateApp(AppDetailsDto dto)
     {
+        var app = await context.Apps.Where(a => a.Id == dto.Id).SingleOrDefaultAsync();
+        if (app == null)
+        {
+            return BadRequest();
+        }
 
+        CopyAppDetailsDtoToEntity(dto, app);
+        await context.SaveChangesAsync();
+
+        return Ok();
     }
 
     [HttpDelete]
-    public void DeleteApp(int id)
+    public async Task<ActionResult<AppDetailsDto>> DeleteApp(int id)
     {
+        var app = await context.Apps.Where(a => a.Id == id).SingleOrDefaultAsync();
+        if (app == null)
+        {
+            return BadRequest();
+        }
 
+        context.Apps.Remove(app);
+        await context.SaveChangesAsync();
+
+        return ConvertAppEntityToDto(app);
+    }
+
+    private AppDetailsDto ConvertAppEntityToDto(App entity) => new AppDetailsDto()
+    {
+        Id = entity.Id,
+        Name = entity.Name,
+        ShortDescription = entity.ShortDescription,
+        Description = entity.Description,
+        ImagePath = entity.ImagePath,
+        Level = entity.Level,
+        CreatedDate = entity.CreatedDate,
+        UpdatedDate = entity.UpdatedDate,
+        Urls = entity.Urls,
+        Category = entity.Category,
+        Languages = entity.AppLanguages.Select(al => al.Language).ToList()
+    };
+
+    private App CopyAppDetailsDtoToEntity(AppDetailsDto dto, App entity)
+    {
+        entity.Name = dto.Name;
+        entity.ShortDescription = dto.ShortDescription;
+        entity.Description = dto.Description;
+        entity.ImagePath = dto.ImagePath;
+        entity.Level = dto.Level;
+        entity.Urls = dto.Urls;
+        entity.Category = dto.Category;
+        entity.AppLanguages = dto.Languages.Select(l => new AppLanguage()
+        {
+            Language = l
+        }).ToList();
+        return entity;
     }
 }

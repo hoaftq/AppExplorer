@@ -13,7 +13,7 @@ class AppDetailsDto
 
     public string ImagePath { get; set; }
 
-    public List<Language> Languages { get; set; }
+    public ICollection<Language> Languages { get; set; }
 
     public Level Level { get; set; }
 
