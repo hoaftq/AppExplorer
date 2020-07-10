@@ -24,7 +24,7 @@ class AppExplorerController : ControllerBase
             Name = a.Name,
             ImagePath = a.ImagePath,
             ShortDescription = a.ShortDescription
-        }).ToListAsync();
+        }).AsNoTracking().ToListAsync();
     }
 
     [HttpGet("{id}")]
@@ -35,6 +35,7 @@ class AppExplorerController : ControllerBase
                                             .ThenInclude(al => al.Language)
                                         .Where(a => a.Id == id)
                                         .Select(a => ConvertAppEntityToDto(a))
+                                        .AsNoTracking()
                                         .SingleOrDefaultAsync();
         if (result == null)
         {

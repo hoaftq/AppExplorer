@@ -141,6 +141,8 @@ namespace AppExplorerService.Migrations
                 name: "IX_AppLanguage_LanguageId",
                 table: "AppLanguage",
                 column: "LanguageId");
+
+            AppCreatedDateTrigger.AddTrigger(migrationBuilder);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
