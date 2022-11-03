@@ -1,3 +1,4 @@
+using Domain;
 using System;
 using System.Collections.Generic;
 
@@ -15,9 +16,7 @@ class AppDetailsDto
 
     public ICollection<Language> Languages { get; set; }
 
-    public Level Level { get; set; }
-
-    public AppUrl Urls { get; set; }
+    public AppUrls AppUrls { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
