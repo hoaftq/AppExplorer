@@ -1,26 +1,46 @@
-using Domain;
 using System;
 using System.Collections.Generic;
 
-class AppDetailsDto
+namespace Service.Dtos
 {
-    public int Id { get; set; }
+    public class AppDetailsDto
+    {
+        public int Id { get; set; }
 
-    public string Name { get; set; }
+        public string Name { get; set; }
 
-    public string ShortDescription { get; set; }
+        public AppInfoDto AppInfo { get; set; }
 
-    public string Description { get; set; }
+        public IList<LanguageDto> Languages { get; set; }
 
-    public string ImagePath { get; set; }
+        public AppUrlsDto AppUrls { get; set; }
 
-    public ICollection<Language> Languages { get; set; }
+        public CategoryDto Category { get; set; }
 
-    public AppUrls AppUrls { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-    public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+    }
 
-    public DateTime UpdatedDate { get; set; }
+    public class AppInfoDto
+    {
+        public string ShortDescription { get; }
 
-    public Category Category { get; set; }
+        public string Description { get; }
+
+        public string ImagePath { get; }
+    }
+
+    public class AppUrlsDto
+    {
+        public string SourceUrl { get; }
+
+        public string ProductUrl { get; }
+
+        public string LibUrl { get; }
+
+        public string DownloadUrl { get; }
+
+        public string ArticleUrl { get; }
+    }
 }
