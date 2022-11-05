@@ -7,10 +7,26 @@ namespace Service.Dtos
     {
         protected AppDetailsDtoProfile()
         {
-            CreateMap<App, AppDetailsDto>()
-                .ForMember(dest => dest.ImagePath, opt => opt.MapFrom(src => src.AppInfo.ImagePath))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.AppInfo.Description))
-                .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.AppInfo.ShortDescription));
+            CreateMap<App, AppDetailsDto>();
+            CreateMap<AppDetailsDto, App>();
+        }
+    }
+
+    public class AppInfoDtoProfile : Profile
+    {
+        public AppInfoDtoProfile()
+        {
+            CreateMap<AppInfo, AppInfoDto>();
+            CreateMap<AppInfoDto, AppInfo>();
+        }
+    }
+
+    public class AppUrlsDtoProfile : Profile
+    {
+        public AppUrlsDtoProfile()
+        {
+            CreateMap<AppUrls, AppUrlsDto>();
+            CreateMap<AppUrlsDto, AppUrls>();
         }
     }
 }
