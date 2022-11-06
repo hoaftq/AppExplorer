@@ -15,9 +15,9 @@ namespace Service.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly AppDbContext dbContext;
-        private readonly Mapper mapper;
+        private readonly IMapper mapper;
 
-        public CategoryController(AppDbContext dbContext, Mapper mapper)
+        public CategoryController(AppDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;

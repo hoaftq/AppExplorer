@@ -1,3 +1,4 @@
+using AutoMapper;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,10 @@ namespace AppExplorerService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddScoped((serviceProvider) => new AppDbContext(Configuration.GetConnectionString("AppExplorerConnectionString")));
+
+            services.AddAutoMapper(GetType().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
