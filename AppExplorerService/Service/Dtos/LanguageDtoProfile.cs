@@ -8,6 +8,7 @@ namespace Service.Dtos
         public LanguageDtoProfile()
         {
             CreateMap<Language, LanguageDto>();
+            CreateMap<LanguageDto, Language>();
         }
     }
 }

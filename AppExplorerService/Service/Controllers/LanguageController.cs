@@ -48,7 +48,7 @@ namespace Service.Controllers
             await dbContext.Languages.AddAsync(newLanguage);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), newLanguage.Id);
+            return CreatedAtAction(nameof(Get), new { id = newLanguage.Id }, mapper.Map<LanguageDto>(newLanguage));
         }
 
         [HttpPut("{id}")]
