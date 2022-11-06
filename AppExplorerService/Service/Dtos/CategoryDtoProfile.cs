@@ -8,6 +8,7 @@ namespace Service.Dtos
         public CategoryDtoProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Service.Dtos
 
         public AppInfoDto AppInfo { get; set; }
 
-        public IList<LanguageDto> Languages { get; set; }
+        public IReadOnlyList<LanguageDto> Languages { get; set; }
 
         public AppUrlsDto AppUrls { get; set; }
 
@@ -24,23 +24,23 @@ namespace Service.Dtos
 
     public class AppInfoDto
     {
-        public string ShortDescription { get; }
+        public string ShortDescription { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
 
-        public string ImagePath { get; }
+        public string ImagePath { get; set; }
     }
 
     public class AppUrlsDto
     {
-        public string SourceUrl { get; }
+        public string SourceUrl { get; set; }
 
-        public string ProductUrl { get; }
+        public string ProductUrl { get; set; }
 
-        public string LibUrl { get; }
+        public string LibUrl { get; set; }
 
-        public string DownloadUrl { get; }
+        public string DownloadUrl { get; set; }
 
-        public string ArticleUrl { get; }
+        public string ArticleUrl { get; set; }
     }
 }

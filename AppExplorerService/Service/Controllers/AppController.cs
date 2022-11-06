@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Service.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AppController : ControllerBase
     {
         private readonly AppDbContext context;
@@ -46,17 +46,17 @@ namespace Service.Controllers
             return result;
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> CreateApp(AppDetailsDto dto)
         {
             var app = mapper.Map<App>(dto);
             context.Apps.Attach(app);
             await context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAppDetails), app.Id, app);
+            return CreatedAtAction(nameof(GetAppDetails), new { id = app.Id }, mapper.Map<AppDetailsDto>(app));
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateApp(int id, AppDetailsDto dto)
         {
             if (id != dto.Id)

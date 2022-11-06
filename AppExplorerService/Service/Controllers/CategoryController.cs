@@ -48,7 +48,7 @@ namespace Service.Controllers
             await dbContext.Categories.AddAsync(newCategory);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), newCategory.Id);
+            return CreatedAtAction(nameof(Get), new { id = newCategory.Id }, mapper.Map<CategoryDto>(newCategory));
         }
 
         [HttpPut("{id}")]
