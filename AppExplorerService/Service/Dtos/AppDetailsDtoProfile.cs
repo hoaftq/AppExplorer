@@ -5,7 +5,7 @@ namespace Service.Dtos
 {
     public class AppDetailsDtoProfile : Profile
     {
-        protected AppDetailsDtoProfile()
+        public AppDetailsDtoProfile()
         {
             CreateMap<App, AppDetailsDto>();
             CreateMap<AppDetailsDto, App>();

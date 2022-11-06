@@ -15,9 +15,9 @@ namespace Service.Controllers
     public class LanguageController : ControllerBase
     {
         private readonly AppDbContext dbContext;
-        private readonly Mapper mapper;
+        private readonly IMapper mapper;
 
-        public LanguageController(AppDbContext dbContext, Mapper mapper)
+        public LanguageController(AppDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;

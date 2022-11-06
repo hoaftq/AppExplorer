@@ -15,9 +15,9 @@ namespace Service.Controllers
     public class AppController : ControllerBase
     {
         private readonly AppDbContext context;
-        private readonly Mapper mapper;
+        private readonly IMapper mapper;
 
-        public AppController(AppDbContext context, Mapper mapper)
+        public AppController(AppDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
