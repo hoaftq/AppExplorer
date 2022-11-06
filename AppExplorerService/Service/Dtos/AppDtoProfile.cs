@@ -5,7 +5,7 @@ namespace Service.Dtos
 {
     public class AppDtoProfile : Profile
     {
-        protected AppDtoProfile()
+        public AppDtoProfile()
         {
             CreateMap<App, AppDto>()
                 .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.AppInfo.ShortDescription))
