@@ -9,22 +9,22 @@ namespace Infrastructure.CustomMigration
             migrationBuilder.InsertData(
                 table: "Language",
                 columns: new[] { "Name" },
-                values: new List<string>
+                values: new object[,]
                 {
-                    "Javascript",
-                    "Python",
-                    "Go",
-                    "Java",
-                    "Kotlin",
-                    "PHP",
-                    "C#",
-                    "Swift",
-                    "R",
-                    "Ruby",
-                    "C/C++",
-                    "TypeScript",
-                    "Scala"
-                }.OrderBy(l => l).ToArray());
+                    { "Javascript" },
+                    { "Python" },
+                    { "Go" },
+                    { "Java" },
+                    { "Kotlin" },
+                    { "PHP" },
+                    { "C#" },
+                    { "Swift" },
+                    { "R" },
+                    { "Ruby" },
+                    { "C/C++" },
+                    { "TypeScript" },
+                    { "Scala" }
+                });
         }
 
         public static void Down(MigrationBuilder migrationBuilder)
