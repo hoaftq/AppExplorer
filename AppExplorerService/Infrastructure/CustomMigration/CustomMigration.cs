@@ -2,7 +2,7 @@
 
 namespace Infrastructure.CustomMigration
 {
-    public class CustomMigration : Migration
+    internal class CustomMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

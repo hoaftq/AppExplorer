@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.CustomMigration
 {
-    class AppUpdateTrigger
+    internal class AppUpdateTrigger
     {
         public static void Up(MigrationBuilder migrationBuilder)
         {
