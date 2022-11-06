@@ -11,23 +11,19 @@ namespace Infrastructure.CustomMigration
                 columns: new[] { "Name" },
                 values: new List<string>
                 {
-                    "Java",
-                    "Spring",
-                    "Spring Boot",
-                    "C#",
                     "Javascript",
-                    "Typescript",
-                    "HTML",
-                    "CSS",
-                    "SCSS",
-                    "Angular",
-                    "Reactjs",
-                    "JQuery",
-                    "Bootstrap",
-                    "Asp.Net Core API",
-                    "Asp.Net Core MVC",
-                    "Asp.Net Core Razor",
-                    "Entity Framework Core"
+                    "Python",
+                    "Go",
+                    "Java",
+                    "Kotlin",
+                    "PHP",
+                    "C#",
+                    "Swift",
+                    "R",
+                    "Ruby",
+                    "C/C++",
+                    "TypeScript",
+                    "Scala"
                 }.OrderBy(l => l).ToArray());
         }
 
