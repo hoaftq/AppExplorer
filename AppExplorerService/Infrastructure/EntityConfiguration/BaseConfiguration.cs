@@ -10,8 +10,8 @@ namespace Infrastructure.EntityConfiguration
         {
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
-            builder.Property(e => e.CreatedDate).HasDefaultValueSql("GETDATE()");
-            builder.Property(e => e.UpdatedDate).HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
+            builder.Property(e => e.CreatedDate);
+            builder.Property(e => e.UpdatedDate);
         }
     }
 }
