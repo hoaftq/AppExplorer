@@ -6,10 +6,6 @@ namespace Domain
     {
         public string Name { get; private set; }
 
-        private Category()
-        {
-        }
-
         public Category(string name)
         {
             Update(name);

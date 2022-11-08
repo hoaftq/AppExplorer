@@ -8,10 +8,6 @@ namespace Domain
 
         public IReadOnlyList<App> Apps { get; } = new List<App>();
 
-        private Language()
-        {
-        }
-
         public Language(string name)
         {
             Update(name);
