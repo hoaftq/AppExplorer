@@ -1,4 +1,3 @@
-using AutoMapper;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,7 +22,7 @@ namespace AppExplorerService
         {
             services.AddControllers();
 
-            services.AddScoped((serviceProvider) => new AppDbContext(Configuration.GetConnectionString("AppExplorerConnectionString")));
+            services.AddScoped(_ => new AppDbContext(Configuration.GetConnectionString("AppExplorerConnectionString")));
 
             services.AddAutoMapper(GetType().Assembly);
         }
