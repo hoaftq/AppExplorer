@@ -4,11 +4,11 @@ namespace Domain
 {
     public class AppInfo : ValueObject<AppInfo>
     {
-        public string ShortDescription { get; }
+        public string ShortDescription { get; private set; }
 
-        public string Description { get; }
+        public string Description { get; private set; }
 
-        public string ImagePath { get; }
+        public string ImagePath { get; private set; }
 
         public AppInfo(string shortDescription, string description, string imagePath = null)
         {
@@ -19,12 +19,14 @@ namespace Domain
 
         public override int GetValueHashCode()
         {
-            throw new NotImplementedException();
+            return HashCode.Combine(ShortDescription, Description, ImagePath);
         }
 
         public override bool ValueEquals(AppInfo t)
         {
-            throw new NotImplementedException();
+            return ShortDescription == t.ShortDescription
+                && Description == t.Description
+                && ImagePath == t.ImagePath;
         }
     }
 }
