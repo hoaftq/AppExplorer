@@ -2,17 +2,18 @@ using Domain.Common;
 
 namespace Domain
 {
+    // TODO private set is for mapper
     public class App : Entity
     {
-        public string Name { get; }
+        public string Name { get; private set; }
 
-        public AppInfo AppInfo { get; }
+        public AppInfo AppInfo { get; private set; }
 
-        public AppUrls AppUrls { get; }
+        public AppUrls AppUrls { get; private set; }
 
-        public Category Category { get; }
+        public Category Category { get; private set; }
 
-        public IReadOnlyList<Language> Languages { get; }
+        public IReadOnlyList<Language> Languages { get; } = new List<Language>();
 
         private App()
         {

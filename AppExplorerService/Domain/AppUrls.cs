@@ -4,15 +4,15 @@ namespace Domain
 {
     public class AppUrls : ValueObject<AppUrls>
     {
-        public string SourceUrl { get; }
+        public string SourceUrl { get; private set; }
 
-        public string ProductUrl { get; }
+        public string ProductUrl { get; private set; }
 
-        public string LibUrl { get; }
+        public string LibUrl { get; private set; }
 
-        public string DownloadUrl { get; }
+        public string DownloadUrl { get; private set; }
 
-        public string ArticleUrl { get; }
+        public string ArticleUrl { get; private set; }
 
         public AppUrls(
             string sourceUrl,
@@ -30,12 +30,16 @@ namespace Domain
 
         public override int GetValueHashCode()
         {
-            throw new NotImplementedException();
+            return HashCode.Combine(SourceUrl, ProductUrl, LibUrl, DownloadUrl, ArticleUrl);
         }
 
         public override bool ValueEquals(AppUrls t)
         {
-            throw new NotImplementedException();
+            return SourceUrl == t.SourceUrl
+                && ProductUrl == t.ProductUrl
+                && LibUrl == t.LibUrl
+                && DownloadUrl == t.DownloadUrl
+                && ArticleUrl == t.ArticleUrl;
         }
     }
 }
