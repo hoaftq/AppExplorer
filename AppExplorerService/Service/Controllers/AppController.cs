@@ -56,7 +56,7 @@ namespace Service.Controllers
             return CreatedAtAction(nameof(GetAppDetails), new { id = app.Id }, mapper.Map<AppDetailsDto>(app));
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateApp(int id, AppDetailsDto dto)
         {
             if (id != dto.Id)
@@ -64,19 +64,28 @@ namespace Service.Controllers
                 return BadRequest("Id didn't match");
             }
 
-            var app = await context.Apps.Where(a => a.Id == dto.Id).SingleOrDefaultAsync();
+            var app = await context.Apps.Include(a => a.Category)
+                                        .Include(a => a.Languages)
+                                        .SingleOrDefaultAsync(a => a.Id == id);
             if (app == null)
             {
                 return NotFound($"Could not find app wit Id of {id}");
             }
 
             mapper.Map(dto, app);
+
+            context.Entry(app.Category).State = EntityState.Unchanged;
+            foreach (var language in app.Languages)
+            {
+                context.Entry(language).State = EntityState.Unchanged;
+            }
+
             await context.SaveChangesAsync();
 
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<AppDetailsDto>> DeleteApp(int id)
         {
             var app = await context.Apps.Where(a => a.Id == id).SingleOrDefaultAsync();
