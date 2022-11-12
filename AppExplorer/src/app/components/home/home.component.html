@@ -6,9 +6,10 @@
     </ol>
     <div class="carousel-inner">
         <div *ngFor="let app of recentApps; index as i" class="carousel-item" [class.active]="i == 0">
-        <div *ngFor="let app of apps; index as i" class="carousel-item" [class.active]="i == 0">
-            <img [src]="app.imagePath" class="d-block w-100" [alt]="app.name">
-            <div class="carousel-caption d-block">
+            <a class="d-block" style="height: 700px;" routerLink="/apps/{{app.id}}">
+                <img *ngIf="app.imagePath" [src]="app.imagePath" class="d-block mx-auto mh-100 mw-100" [alt]="app.name">
+            </a>
+            <div class="carousel-caption">
                 <h2>{{app.name}}</h2>
                 <p>{{app.shortDescription}}</p>
             </div>
