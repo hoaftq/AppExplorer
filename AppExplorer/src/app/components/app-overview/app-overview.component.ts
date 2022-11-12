@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppExplorerService } from 'src/app/services/app-explorer.service';
-import { AppDto } from 'src/app/dtos/app-dtos';
 
 @Component({
   selector: 'app-app-overview',
@@ -9,12 +8,11 @@ import { AppDto } from 'src/app/dtos/app-dtos';
 })
 export class AppOverviewComponent implements OnInit {
 
-  apps: AppDto[];
+  apps$ = this.service.apps$;
 
   constructor(private service: AppExplorerService) { }
 
   ngOnInit(): void {
-    this.apps = this.service.getApps();
   }
 
 }

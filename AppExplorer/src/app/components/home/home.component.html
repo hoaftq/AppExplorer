@@ -1,9 +1,11 @@
-<div id="appsCarousel" class="carousel slide" data-ride="carousel">
+<div *ngIf="recentApps$ | async as recentApps" id="appsCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        <li *ngFor="let app of apps; index as i" data-target="#appsCarousel" data-slide-to="i" [class.active]="i == 0">
+        <li *ngFor="let app of recentApps; index as i" data-target="#appsCarousel" data-slide-to="i"
+            [class.active]="i === 0">
         </li>
     </ol>
     <div class="carousel-inner">
+        <div *ngFor="let app of recentApps; index as i" class="carousel-item" [class.active]="i == 0">
         <div *ngFor="let app of apps; index as i" class="carousel-item" [class.active]="i == 0">
             <img [src]="app.imagePath" class="d-block w-100" [alt]="app.name">
             <div class="carousel-caption d-block">

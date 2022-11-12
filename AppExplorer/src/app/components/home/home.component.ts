@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppExplorerService } from 'src/app/services/app-explorer.service';
-import { AppDto } from 'src/app/dtos/app-dtos';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +8,11 @@ import { AppDto } from 'src/app/dtos/app-dtos';
 })
 export class HomeComponent implements OnInit {
 
-  apps: AppDto[];
+  recentApps$ = this.service.recentApps$;
 
   constructor(private service: AppExplorerService) { }
 
   ngOnInit(): void {
-    this.apps = this.service.getBestApps();
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="row row-cols-1 row-cols-md-3 px-1">
-    <div class="col" *ngFor="let app of apps">
+    <div class="col" *ngFor="let app of apps$ | async">
         <div class="card mb-2">
             <div class="card-body">
                 <h5 class="card-title">{{app.name}}</h5>

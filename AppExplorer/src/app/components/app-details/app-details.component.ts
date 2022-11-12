@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppExplorerService } from 'src/app/services/app-explorer.service';
-import { AppDetailsDto } from 'src/app/dtos/app-dtos';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-app-details',
@@ -10,13 +10,16 @@ import { AppDetailsDto } from 'src/app/dtos/app-dtos';
 })
 export class AppDetailsComponent implements OnInit {
 
-  appDetails: AppDetailsDto;
+  appDetails$ = this.route.paramMap.pipe(
+    flatMap(p => {
+      const id = +p.get('id');
+      return this.service.getAppDetails(id);
+    })
+  );
 
   constructor(private route: ActivatedRoute, private service: AppExplorerService) { }
 
   ngOnInit(): void {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.appDetails = this.service.getAppDetails(id);
   }
 
 }

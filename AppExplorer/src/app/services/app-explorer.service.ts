@@ -1,99 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppDetailsDto, AppDto, CategoryDto, LanguageDto } from '../dtos/app-dtos';
+import { flatMap, map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppExplorerService {
 
-  private apps = [
-    {
-      id: 1,
-      name: 'TicTacToe',
-      shortDescription: 'TicTacToe game with 3x3 board',
-      description: '',
-      imagePath: 'assets/TicTacToe.jpg',
-      languages: [{ id: 1, name: 'Javascript' }],
-      level: 1,
-      url: 'https://blue-coast-08ba4c600.azurestaticapps.net/',
-      sourceUrl: 'https://github.com/hoaftq/TicTacToe',
-      createdDate: new Date(),
-      updatedDate: new Date(),
+  baseUrl = "https://localhost:44370/api";
 
-      categoryId: 1,
-      categoryName: 'Game'
-    },
-    {
-      id: 2,
-      name: '248Game',
-      shortDescription: '248 Game',
-      description: '',
-      imagePath: 'assets/248Game.jpg',
-      languages: [{ id: 1, name: 'Javascript' }],
-      level: 2,
-      url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
-      sourceUrl: 'https://github.com/hoaftq/248Game',
-      createdDate: new Date(),
-      updatedDate: new Date(),
-
-      categoryId: 1,
-      categoryName: 'Game'
-    },
-    {
-      id: 3,
-      name: 'Test data generator',
-      shortDescription: 'A tool to generate test data',
-      description: '',
-      languages: [{ id: 2, name: 'C#' }, { id: 3, name: "WPF" }],
-      level: 1,
-      url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
-      sourceUrl: 'https://github.com/hoaftq/248Game',
-      createdDate: new Date(),
-      updatedDate: new Date(),
-
-      categoryId: 2,
-      categoryName: 'Tool'
-    },
-    {
-      id: 4,
-      name: 'Sudoku',
-      shortDescription: 'A popular puzzle game',
-      description: '',
-      languages: [{ id: 2, name: 'C#' }, { id: 4, name: "UWP" }],
-      level: 3,
-      url: 'https://zealous-ocean-06d94d200.azurestaticapps.net/',
-      sourceUrl: 'https://github.com/hoaftq/248Game',
-      createdDate: new Date(),
-      updatedDate: new Date(),
-
-      categoryId: 1,
-      categoryName: 'Game'
-    }
-  ];
-
-  constructor() { }
-
-  getApps(): AppDto[] {
-    return this.apps.map(e => ({
-      id: e.id,
-      name: e.name,
-      imagePath: e.imagePath,
-      shortDescription: e.shortDescription
-    }));
-  }
-
-  getAppDetails(id: number): AppDetailsDto {
-    return this.apps.find(e => e.id == id);
-  }
-
-  getBestApps(numberOfApps: number = 3): AppDto[] {
-    return this.apps.sort(e => e.level).slice(0, numberOfApps).map(e => ({
-      id: e.id,
-      name: e.name,
-      imagePath: e.imagePath,
-      shortDescription: e.shortDescription
-    }));
-  }
+  constructor(private http: HttpClient) { }
 
   getCategories(): CategoryDto[] {
     return [
@@ -107,5 +24,19 @@ export class AppExplorerService {
       { id: 1, name: "Java" },
       { id: 2, name: "C#" },
       { id: 3, name: "Typescript" }];
+  }
+
+  languages$ = this.http.get<LanguageDto>(`${this.baseUrl}/language`);
+
+  categories$ = this.http.get<CategoryDto>(`${this.baseUrl}/category`);
+
+  apps$ = this.http.get<AppDto[]>(`${this.baseUrl}/app`);
+
+  recentApps$ = this.apps$.pipe(
+    map(apps => apps.slice(0, 4))
+  );
+
+  getAppDetails(id: number) {
+    return this.http.get<AppDetailsDto>(`${this.baseUrl}/app/${id}`);
   }
 }
