@@ -1,18 +1,21 @@
-export interface App extends Entity {
+export interface AppDetailsDto {
+    id: number;
     name: string;
-    appInfo: AppInfo;
-    appUrls: AppUrls;
-    category: Category;
-    languages: Language[];
+    appInfo: AppInfoDto;
+    languages: LanguageDto[];
+    appUrls: AppUrlsDto;
+    category: CategoryDto;
+    createdDate: string;
+    updatedDate: string;
 }
 
-export interface AppInfo {
+export interface AppInfoDto {
     shortDescription: string;
     description: string;
     imagePath: string;
 }
 
-export interface AppUrls {
+export interface AppUrlsDto {
     sourceUrl: string;
     productUrl: string;
     libUrl: string;
@@ -20,17 +23,19 @@ export interface AppUrls {
     articleUrl: string;
 }
 
-export interface Category extends Entity {
-    name: string;
-}
-
-export interface Language extends Entity {
-    name: string;
-    apps: App[];
-}
-
-export interface Entity {
+export interface AppDto {
     id: number;
-    createdDate: string;
-    updatedDate: string;
+    name: string;
+    shortDescription: string;
+    imagePath: string;
+}
+
+export interface CategoryDto {
+    id: number;
+    name: string;
+}
+
+export interface LanguageDto {
+    id: number;
+    name: string;
 }

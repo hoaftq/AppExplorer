@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppDetailsDto, AppDto, CategoryDto, LanguageDto } from '../dtos/app-dtos';
-import { flatMap, map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { AppDetailsDto, AppDto, CategoryDto, LanguageDto } from './dtos';
 
 @Injectable({
   providedIn: 'root'
