@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppExplorerService } from 'src/app/services/app-explorer.service';
-import { CategoryDto, LanguageDto } from 'src/app/dtos/app-dtos';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryDto, LanguageDto } from 'src/app/services/dtos';
 
 @Component({
   selector: 'app-update-app',

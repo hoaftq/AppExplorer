@@ -6,10 +6,9 @@
         </div>
     </div>
     <div class="col-auto">
-        <a class="btn btn-light mr-2" (click)="saveName()">Save</a>
+        <a class="btn btn-light mr-2" [class.disabled]="!nameControl.dirty" (click)="saveName()">Save</a>
         <a class="btn btn-light" (click)="cancel()">Cancel</a>
     </div>
-
 </div>
 
 <ng-template #readonlyText>

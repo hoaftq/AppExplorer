@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,15 +6,13 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './add-name-entity.component.html',
   styleUrls: ['./add-name-entity.component.scss']
 })
-export class AddNameEntityComponent implements OnInit {
+export class AddNameEntityComponent {
 
   @Input()
   entityName: string;
 
   @Output()
   add = new EventEmitter<string>();
-
-  placeHolder = "";
 
   formGroup = this.fb.group(
     { name: this.fb.control('', Validators.required) }
@@ -26,15 +24,10 @@ export class AddNameEntityComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.placeHolder = `Enter ${this.entityName.toLocaleLowerCase()}`;
-  }
-
   addEntity() {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.add.emit(this.name.value);
-      alert(this.name.value)
       this.formGroup.reset();
     }
   }
