@@ -13,6 +13,7 @@ import { AboutComponent } from './components/about/about.component';
 import { LanguageComponent } from './components/language/language.component';
 import { AddNameEntityComponent } from './components/shared/add-name-entity/add-name-entity.component';
 import { EditNameEntityComponent } from './components/shared/edit-name-entity/edit-name-entity.component';
+import { MessagesComponent } from './components/shared/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EditNameEntityComponent } from './components/shared/edit-name-entity/ed
     LanguageComponent,
     AddNameEntityComponent,
     EditNameEntityComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

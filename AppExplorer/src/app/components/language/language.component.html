@@ -1,4 +1,5 @@
 <div class="m-3">
+    <app-messages [messages]="messages$ | async"></app-messages>
     <h5>List of all languages</h5>
     <table *ngIf="languages$ | async as languages" class="table table-sm table-striped table-hover vertical-align">
         <thead class="thead-light">

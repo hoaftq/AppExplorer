@@ -1,0 +1,7 @@
+<ng-container *ngFor="let m of messages; let i = index">
+    <div class="alert alert-dismissible"
+        [ngClass]="{'alert-danger': m.level === 'error', 'alert-warning': m.level === 'warning', 'alert-success': m.level === 'success'}">
+        {{m.message}}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+</ng-container>
