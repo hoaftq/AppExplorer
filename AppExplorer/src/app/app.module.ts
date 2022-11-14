@@ -10,6 +10,9 @@ import { AppDetailsComponent } from './components/app-details/app-details.compon
 import { UpdateAppComponent } from './components/update-app/update-app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
+import { LanguageComponent } from './components/language/language.component';
+import { AddNameEntityComponent } from './components/shared/add-name-entity/add-name-entity.component';
+import { EditNameEntityComponent } from './components/shared/edit-name-entity/edit-name-entity.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { AboutComponent } from './components/about/about.component';
     AppDetailsComponent,
     UpdateAppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    LanguageComponent,
+    AddNameEntityComponent,
+    EditNameEntityComponent,
   ],
   imports: [
     BrowserModule,

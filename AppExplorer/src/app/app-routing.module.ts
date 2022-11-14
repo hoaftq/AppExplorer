@@ -5,6 +5,7 @@ import { AppOverviewComponent } from './components/app-overview/app-overview.com
 import { UpdateAppComponent } from './components/update-app/update-app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
+import { LanguageComponent } from './components/language/language.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'apps/:id', component: AppDetailsComponent },
   { path: 'admin/update-app', component: UpdateAppComponent },
   { path: 'admin/update-app/:id', component: UpdateAppComponent },
+  { path: 'admin/languages', component: LanguageComponent },
   { path: 'about', component: AboutComponent }
 ];
 

@@ -1,0 +1,22 @@
+<div class="m-3">
+    <h5>List of all languages</h5>
+    <table *ngIf="languages$ | async as languages" class="table table-sm table-striped table-hover vertical-align">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="w-10">Index</th>
+                <th scope="col" class="w-10">Id</th>
+                <th scope="col" class="w-70">Name</th>
+                <th scope="col" class="w-10"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lang of languages; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{lang.id}}</td>
+                <td app-edit-name-entity [originalValue]="lang.name" (save)="updateLanguage(lang.id, $event)"></td>
+                <td><a (click)="deleteLanguage(lang.id)" class="btn btn-outline-danger">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <app-add-name-entity entityName="language" (add)="addLanguage($event)"></app-add-name-entity>
+</div>

@@ -1,0 +1,24 @@
+<div *ngIf="isEditting; else readonlyText" ngClass="was-validated row">
+    <div class="col-8 mr-auto">
+        <input type="text" class="form-control" required [formControl]="nameControl">
+        <div *ngIf="nameControl.errors?.required && (nameControl.dirty || nameControl.touched)" class="invalid-tooltip">
+            Name is required
+        </div>
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-light mr-2" (click)="saveName()">Save</a>
+        <a class="btn btn-light" (click)="cancel()">Cancel</a>
+    </div>
+
+</div>
+
+<ng-template #readonlyText>
+    <div class="row align-items-center">
+        <div class="col-8 mr-auto">
+            {{originalValue}}
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-light" (click)="editName()">Edit</a>
+        </div>
+    </div>
+</ng-template>

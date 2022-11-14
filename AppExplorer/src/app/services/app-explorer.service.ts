@@ -26,7 +26,19 @@ export class AppExplorerService {
       { id: 3, name: "Typescript" }];
   }
 
-  languages$ = this.http.get<LanguageDto>(`${this.baseUrl}/language`);
+  languages$ = this.http.get<LanguageDto[]>(`${this.baseUrl}/language`);
+
+  addLanguage(name: string) {
+    return this.http.post(`${this.baseUrl}/language`, { name });
+  }
+
+  updateLanguage(language: LanguageDto) {
+    return this.http.put(`${this.baseUrl}/language/${language.id}`, language);
+  }
+
+  deleteLanguage(id: number) {
+    return this.http.delete(`${this.baseUrl}/language/${id}`);
+  }
 
   categories$ = this.http.get<CategoryDto>(`${this.baseUrl}/category`);
 
